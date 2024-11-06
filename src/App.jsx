@@ -3,7 +3,9 @@ import ZombieFighters from "./components/ZombieFighters";
 import "./App.css";
 
 const App = () => {
-  const team = [
+  const [team, setTeam] = useState([]);
+  const [money, setMoney] = useState(100);
+  const [zombieFighters, setZombieFighters] = useState([
     {
       name: "Survivor",
       price: 12,
@@ -74,27 +76,31 @@ const App = () => {
       agility: 6,
       img: "https://via.placeholder.com/150/602b9e",
     },
-  ];
+  ]);
+
+  const addToTeam = (newMember) => {
+    if (money >= newMember.price) {
+      setTeam([...team, newMember]);
+      setMoney(money - newMember.price);
+    }
+  };
 
   return (
     <div className="zombie-fighters-container">
-      <h1>Zombie Fighters</h1>
-      <h3>Money: 100</h3>
+      <h3>Money: {money}</h3>
       <h3>Team Strength:</h3>
       <h3>Team Agility:</h3>
       <h3>Team</h3>
       <p>Pick some team members</p>
       <ul>
-        {team.map((members) => {
-          return (
-            <ZombieFighters
-              img={members.img}
-              name={members.name}
-              price={members.price}
-              strength={members.strength}
-              agility={members.agility}
-            />
-          );
+        {team.map((member) => {
+          return <ZombieFighters zombieFighter={member} />;
+        })}
+      </ul>
+      <h1>Zombie Fighters</h1>
+      <ul>
+        {zombieFighters.map((zombieFighter) => {
+          return <ZombieFighters zombieFighter={zombieFighter} addToTeam={addToTeam} />;
         })}
       </ul>
     </div>

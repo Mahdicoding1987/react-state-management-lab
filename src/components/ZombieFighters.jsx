@@ -1,12 +1,14 @@
-const ZombieFighters = (props) => {
+const ZombieFighters = ({ zombieFighter, addToTeam }) => {
+  const { name, price, strength, agility, img } = zombieFighter;
+
   return (
     <li className="zombie-fighters">
-      <img src={props.img} alt={props.name} />
-      <h3>{props.name}</h3>
-      <p>Price: {props.price}</p>
-      <p>Strength: {props.strength}</p>
-      <p>Agility: {props.agility}</p>
-      <button>Add</button>
+      <img src={img} alt={name} />
+      <h3>{name}</h3>
+      <p>Price: {price}</p>
+      <p>Strength: {strength}</p>
+      <p>Agility: {agility}</p>
+      <button onClick={() => addToTeam(zombieFighter)}>Add</button>
     </li>
   );
 };
