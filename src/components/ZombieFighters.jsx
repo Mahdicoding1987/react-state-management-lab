@@ -1,5 +1,8 @@
+import { useState } from "react";
 const ZombieFighters = ({ zombieFighter, addToTeam }) => {
   const { name, price, strength, agility, img } = zombieFighter;
+
+  const [buttonText, setButtonText] = useState("Add");
 
   return (
     <li className="zombie-fighters">
@@ -8,7 +11,7 @@ const ZombieFighters = ({ zombieFighter, addToTeam }) => {
       <p>Price: {price}</p>
       <p>Strength: {strength}</p>
       <p>Agility: {agility}</p>
-      <button onClick={() => addToTeam(zombieFighter)}>Add</button>
+      <button onClick={() => addToTeam(zombieFighter)}>{buttonText}</button>
     </li>
   );
 };

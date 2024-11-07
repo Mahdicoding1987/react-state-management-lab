@@ -5,6 +5,8 @@ import "./App.css";
 const App = () => {
   const [team, setTeam] = useState([]);
   const [money, setMoney] = useState(100);
+  const [teamStrength, setTeamStrength] = useState(0);
+  const [teamAgility, setTeamAgility] = useState(0);
   const [zombieFighters, setZombieFighters] = useState([
     {
       name: "Survivor",
@@ -82,15 +84,17 @@ const App = () => {
     if (money >= newMember.price) {
       setTeam([...team, newMember]);
       setMoney(money - newMember.price);
+      setTeamStrength(teamStrength + newMember.strength);
+      setTeamAgility(teamAgility + newMember.agility);
     }
   };
 
   return (
     <div className="zombie-fighters-container">
       <h3>Money: {money}</h3>
-      <h3>Team Strength:</h3>
-      <h3>Team Agility:</h3>
-      <h3>Team</h3>
+      <h3>Team Strength: {teamStrength}</h3>
+      <h3>Team Agility: {teamAgility}</h3>
+      <h1>Your Team</h1>
       <p>Pick some team members</p>
       <ul>
         {team.map((member) => {
