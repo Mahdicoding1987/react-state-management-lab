@@ -89,6 +89,15 @@ const App = () => {
     }
   };
 
+  const removeFromTeam = (memberToRemove, index) => {
+    const updatedTeam = [...team];
+    updatedTeam.splice(index, 1);
+    setTeam(updatedTeam);
+    setMoney(money + memberToRemove.price);
+    setTeamStrength(teamStrength - memberToRemove.strength);
+    setTeamAgility(teamAgility - memberToRemove.agility);
+  };
+
   return (
     <div className="zombie-fighters-container">
       <h3>Money: {money}</h3>
@@ -97,14 +106,16 @@ const App = () => {
       <h1>Your Team</h1>
       <p>Pick some team members</p>
       <ul>
-        {team.map((member) => {
-          return <ZombieFighters zombieFighter={member} />;
+        {team.map((member, index) => {
+          return (
+            <ZombieFighters zombieFighter={member} index={index} checkIfTeam={true} removeFromTeam={removeFromTeam} />
+          );
         })}
       </ul>
       <h1>Zombie Fighters</h1>
       <ul>
-        {zombieFighters.map((zombieFighter) => {
-          return <ZombieFighters zombieFighter={zombieFighter} addToTeam={addToTeam} />;
+        {zombieFighters.map((notMember, index) => {
+          return <ZombieFighters zombieFighter={notMember} index={index} addToTeam={addToTeam} checkIfTeam={false} />;
         })}
       </ul>
     </div>
